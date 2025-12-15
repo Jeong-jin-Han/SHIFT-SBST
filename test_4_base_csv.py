@@ -17,9 +17,6 @@ from module.sbst_core import instrument_and_load, FitnessCalculator
 from hill_climb_multiD import hill_climb_simple_nd_code
 
 
-# ----------------------------------------------------------------------
-# 1) Single-branch baseline HC execution
-# ----------------------------------------------------------------------
 def test_single_branch_baseline_with_metrics(args):
     (
         file_path,
@@ -142,9 +139,6 @@ def test_single_branch_baseline_with_metrics(args):
     }
 
 
-# ----------------------------------------------------------------------
-# 2) Run baseline (no compression) for a single file
-# ----------------------------------------------------------------------
 def run_parallel_baseline_for_file(
     file_path,
     output_csv,
@@ -256,9 +250,7 @@ def run_parallel_baseline_for_file(
     return results
 
 
-# ----------------------------------------------------------------------
-# 3) Multi-seed directory test
-# ----------------------------------------------------------------------
+# Multi-seed directory test runner
 def run_directory_test_baseline_multiseed(
     source_dir,
     output_dir,
@@ -316,9 +308,6 @@ def run_directory_test_baseline_multiseed(
     print(f"\n⭐ All seeds completed. Results saved under: {output_dir}")
 
 
-# ----------------------------------------------------------------------
-# 4) CLI
-# ----------------------------------------------------------------------
 if __name__ == "__main__":
     import argparse
     import multiprocessing

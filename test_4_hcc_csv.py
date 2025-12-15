@@ -23,9 +23,6 @@ from module.sbst_core import instrument_and_load, FitnessCalculator
 from compression_hc import hill_climb_with_compression_nd_code, CompressionManagerND
 
 
-#####################################################################
-# 1) Worker function for each branch
-#####################################################################
 def test_single_branch_with_metrics(args):
     (
         file_path,
@@ -192,9 +189,6 @@ def test_single_branch_with_metrics(args):
     }
 
 
-#####################################################################
-# 2) Run all branches in one file
-#####################################################################
 def run_parallel_test_with_csv(
     file_path,
     output_csv,
@@ -318,9 +312,7 @@ def run_parallel_test_with_csv(
     return results, output_csv
 
 
-#####################################################################
-# 3) Multi-seed directory runner
-#####################################################################
+# Multi-seed directory test runner
 def run_directory_test(
     source_dir,
     output_dir="benchmark_log_test4_hcc_test",
@@ -382,9 +374,6 @@ def run_directory_test(
         json.dump(cfg, f, indent=2)
 
 
-#####################################################################
-# 4) CLI
-#####################################################################
 if __name__ == "__main__":
 
     import argparse

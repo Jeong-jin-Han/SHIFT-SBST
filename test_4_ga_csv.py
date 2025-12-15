@@ -27,9 +27,6 @@ from module.sbst_core import instrument_and_load, FitnessCalculator
 from BASE.ga import ga
 
 
-###############################################################################
-# 1) Worker (GA Evolution)
-###############################################################################
 def _ga_worker(args):
     (
         file_path,
@@ -145,10 +142,6 @@ def _ga_worker(args):
 
     return result
 
-
-###############################################################################
-# 2) Run GA on one file
-###############################################################################
 def run_parallel_test_with_csv(
     file_path: str,
     output_csv: str,
@@ -270,9 +263,7 @@ def run_parallel_test_with_csv(
     return results, output_csv
 
 
-###############################################################################
-# 3) Directory-level Multi-seed Runner
-###############################################################################
+# Multi-seed directory test runner
 def run_directory_test(
     source_dir,
     output_dir="benchmark_log_test4_ga_test",
@@ -329,10 +320,6 @@ def run_directory_test(
     with open(Path(output_dir) / "test_config.json", "w") as f:
         json.dump(cfg, f, indent=2)
 
-
-###############################################################################
-# 4) CLI
-###############################################################################
 if __name__ == "__main__":
     import argparse
     import multiprocessing

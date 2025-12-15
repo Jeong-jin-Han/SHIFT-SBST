@@ -8,9 +8,6 @@ PLOT_DIR = Path("test4_plots")
 PLOT_DIR.mkdir(exist_ok=True)
 
 
-# -------------------------------------------------------------------------
-# 1) Load CSV for all algorithms
-# -------------------------------------------------------------------------
 def load_algorithm_results(base_paths):
     """
     base_paths: dict
@@ -46,9 +43,7 @@ def load_algorithm_results(base_paths):
     return pd.concat(all_rows, ignore_index=True)
 
 
-# -------------------------------------------------------------------------
-# 2) (A) Seed variance boxplots
-# -------------------------------------------------------------------------
+# Seed variance boxplots
 def plot_seed_variance(df, metrics=["best_fitness", "nfe", "convergence_speed"]):
     algorithms = sorted(df["algorithm"].unique())
 
@@ -65,15 +60,11 @@ def plot_seed_variance(df, metrics=["best_fitness", "nfe", "convergence_speed"])
                 PLOT_DIR / f"{algo}_{metric}_seed_variance_boxplot.png", dpi=300
             )
             # save pdf
-            plt.savefig(
-                PLOT_DIR / f"{algo}_{metric}_seed_variance_boxplot.pdf"
-            )
+            plt.savefig(PLOT_DIR / f"{algo}_{metric}_seed_variance_boxplot.pdf")
             plt.close()
 
 
-# -------------------------------------------------------------------------
-# 3) (B) Algorithm-wise boxplot (best_fitness)
-# -------------------------------------------------------------------------
+# Algorithm-wise boxplot (best_fitness)
 def plot_algorithm_boxplot(df):
     plt.figure(figsize=(10, 5))
     sns.boxplot(x="algorithm", y="best_fitness", data=df)
@@ -85,9 +76,7 @@ def plot_algorithm_boxplot(df):
     plt.close()
 
 
-# -------------------------------------------------------------------------
-# 4) (C) Seed sensitivity heatmap
-# -------------------------------------------------------------------------
+# Seed sensitivity heatmap (success rate)
 def plot_seed_sensitivity_by_algorithm(df):
     # success를 평균하면 = success rate (0~1)
     pivot = df.pivot_table(
@@ -108,6 +97,7 @@ def plot_seed_sensitivity_by_algorithm(df):
     plt.close()
 
 
+# Seed sensitivity heatmap (convergence speed)
 def plot_seed_sensitivity_by_algorithm_convergence(df):
     pivot = df.pivot_table(
         index="algorithm", columns="seed", values="convergence_speed", aggfunc="mean"
@@ -122,9 +112,7 @@ def plot_seed_sensitivity_by_algorithm_convergence(df):
     plt.close()
 
 
-# -------------------------------------------------------------------------
-# 5) (D) Branch difficulty heatmap (success rate per algorithm)
-# -------------------------------------------------------------------------
+# Branch difficulty heatmap (success rate)
 def plot_branch_difficulty(df):
     pivot = (
         df.pivot_table(
@@ -142,9 +130,7 @@ def plot_branch_difficulty(df):
     plt.close()
 
 
-# -------------------------------------------------------------------------
-# NEW: Algorithm Sensitivity Summary (single-table, one-glance view)
-# -------------------------------------------------------------------------
+# Algorithm Sensitivity Summary (single-table, one-glance view)
 def compute_algorithm_sensitivity(df):
     metrics = ["best_fitness", "nfe", "convergence_speed"]
     algos = sorted(df["algorithm"].unique())
@@ -181,9 +167,7 @@ def compute_algorithm_sensitivity(df):
     return summary_df
 
 
-# -------------------------------------------------------------------------
-# NEW: Sensitivity Bar Chart
-# -------------------------------------------------------------------------
+# Sensitivity Bar Chart
 def plot_sensitivity_score(summary_df):
     plt.figure(figsize=(10, 5))
     sns.barplot(
@@ -197,12 +181,8 @@ def plot_sensitivity_score(summary_df):
     plt.close()
 
 
-# -------------------------------------------------------------------------
-# MAIN EXECUTION
-# -------------------------------------------------------------------------
 if __name__ == "__main__":
 
-    # Define paths for 6 algorithm variants
     base_paths = {
         "hcc_biased": "benchmark_log_test4_hcc_biased_test",
         "hcc_random": "benchmark_log_test4_hcc_random_test",
