@@ -6,6 +6,7 @@ venv/
 __pypackages__/
 tmp/
 *.md
+!README.md
 .coverage
 *_debug_*/
 *_debug.sh
